@@ -1,9 +1,4 @@
-import {
-  defaultItemHeight,
-  defaultItemWidth,
-  ItemData,
-  ItemType,
-} from "../data";
+import { ItemData, ItemType } from "../data";
 import { Tooltip } from "./Tooltip";
 import "./Item.css";
 import { useEntityMark, useHoverableTooltip } from "../hooks";
@@ -12,7 +7,10 @@ import React from "react";
 import { EntityMarkIcon } from "./EntityMark";
 import { useAppSelector } from "../state";
 
-export interface ItemProps extends ItemData {}
+export interface ItemProps extends ItemData {
+  height: number;
+  width: number;
+}
 
 // TODO: Memoize?
 const convertItemTypeToClassName = (itemType: ItemType) => {
@@ -29,7 +27,7 @@ const convertItemTypeToClassName = (itemType: ItemType) => {
 };
 
 export const Item = (props: ItemProps) => {
-  const { x, y, spawnInfo, type } = props;
+  const { x, y, height, width, spawnInfo, type } = props;
   const marks = React.useRef<EntityMarkIcon[]>([
     "none",
     "checked",
@@ -70,8 +68,8 @@ export const Item = (props: ItemProps) => {
         onMouseLeave={hideTooltipOnHover}
         x={x}
         y={y}
-        height={defaultItemHeight}
-        width={defaultItemWidth}
+        height={height}
+        width={width}
         polygonClassNames={`${
           highlight ? "highlight" : ""
         } ${convertItemTypeToClassName(type)}`}
@@ -79,12 +77,7 @@ export const Item = (props: ItemProps) => {
         <EntityMark x={x + 1} y={y} size={12} mark={currentMark} />
       </InteractablePolygon>
       {spawnInfo && (
-        <Tooltip
-          x={x}
-          y={y}
-          show={shouldShowTooltip}
-          targetWidth={defaultItemWidth}
-        >
+        <Tooltip x={x} y={y} show={shouldShowTooltip} targetWidth={width}>
           <div>{spawnInfo}</div>
         </Tooltip>
       )}

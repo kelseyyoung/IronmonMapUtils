@@ -1,4 +1,4 @@
-import { defaultPortalSize, MapPortalData } from "../data";
+import { MapPortalData } from "../data";
 import { InteractablePolygon } from "./InteractablePolygon";
 import React from "react";
 import { PortalLabel } from "./PortalLabel";
@@ -10,10 +10,12 @@ export interface MapPortalProps extends MapPortalData {
   index: number;
   scale: number;
   color: string;
+  size: number;
 }
 
 export const MapPortal = (props: MapPortalProps) => {
-  const { portal1, portal2, scale, offsetMapCoords, index, color } = props;
+  const { portal1, portal2, scale, offsetMapCoords, index, color, size } =
+    props;
 
   const {
     showMapPortals: show,
@@ -60,8 +62,8 @@ export const MapPortal = (props: MapPortalProps) => {
         onMouseLeave={() => setHovered(false)}
         x={portal1.x}
         y={portal1.y}
-        height={defaultPortalSize}
-        width={defaultPortalSize}
+        height={size}
+        width={size}
       ></InteractablePolygon>
       <InteractablePolygon
         onClick={onPortal2Click}
@@ -69,8 +71,8 @@ export const MapPortal = (props: MapPortalProps) => {
         onMouseLeave={() => setHovered(false)}
         x={portal2.x}
         y={portal2.y}
-        height={defaultPortalSize}
-        width={defaultPortalSize}
+        height={size}
+        width={size}
       ></InteractablePolygon>
       {show && (
         <>

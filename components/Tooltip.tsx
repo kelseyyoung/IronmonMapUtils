@@ -1,6 +1,6 @@
 import React from "react";
 import * as ReactDOM from "react-dom";
-import { DEBUG_MODE } from "../FRLGIronmonMap";
+import { DEBUG_MODE } from "../utils/debugMode";
 import "./Tooltip.css";
 
 export interface TooltipProps {

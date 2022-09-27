@@ -1,8 +1,4 @@
-import {
-  defaultTrainerHeight,
-  defaultTrainerWidth,
-  TrainerData,
-} from "../data";
+import { TrainerData } from "../data";
 import "./Trainer.css";
 import PokeBall from "../assets/pokeball.png";
 import Spinner from "../assets/spinner.png";
@@ -15,10 +11,23 @@ import React from "react";
 import { EntityMarkIcon } from "./EntityMark";
 import { useAppSelector } from "../state";
 
-export interface TrainerProps extends TrainerData {}
+export interface TrainerProps extends TrainerData {
+  height: number;
+  width: number;
+}
 
 export const Trainer = (props: TrainerProps) => {
-  const { name, numPokemon, x, y, walker, spinner, pokemonLevels } = props;
+  const {
+    name,
+    numPokemon,
+    x,
+    y,
+    walker,
+    spinner,
+    pokemonLevels,
+    height,
+    width,
+  } = props;
   const marks = React.useRef<EntityMarkIcon[]>([
     "none",
     "checked",
@@ -50,17 +59,12 @@ export const Trainer = (props: TrainerProps) => {
         onMouseLeave={hideTooltipOnHover}
         x={x}
         y={y}
-        height={defaultTrainerHeight}
-        width={defaultTrainerWidth}
+        height={height}
+        width={width}
       >
         <EntityMark x={x + 1} y={y + 4} size={16} mark={currentMark} />
       </InteractablePolygon>
-      <Tooltip
-        x={x}
-        y={y}
-        show={shouldShowTooltip}
-        targetWidth={defaultTrainerWidth}
-      >
+      <Tooltip x={x} y={y} show={shouldShowTooltip} targetWidth={width}>
         <div className="trainer-name">{name}</div>
         <div className="trainer-info">
           <span className="trainer-info-section">
