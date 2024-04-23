@@ -87,7 +87,13 @@ export const Item = (props: ItemProps) => {
         <EntityMark x={x + 1} y={y} size={12} mark={currentMark} />
       </InteractablePolygon>
       {spawnInfo && (
-        <Tooltip x={x} y={y} show={shouldShowTooltip} targetWidth={width}>
+        <Tooltip
+          x={x}
+          y={y}
+          show={shouldShowTooltip}
+          targetWidth={width}
+          targetHeight={height}
+        >
           <div>{spawnInfo}</div>
         </Tooltip>
       )}

@@ -27,6 +27,7 @@ export const Trainer = (props: TrainerProps) => {
     pokemonLevels,
     height,
     width,
+    tooltipPosition,
   } = props;
   const marks = React.useRef<EntityMarkIcon[]>([
     "none",
@@ -64,7 +65,14 @@ export const Trainer = (props: TrainerProps) => {
       >
         <EntityMark x={x + 1} y={y + 4} size={16} mark={currentMark} />
       </InteractablePolygon>
-      <Tooltip x={x} y={y} show={shouldShowTooltip} targetWidth={width}>
+      <Tooltip
+        x={x}
+        y={y}
+        show={shouldShowTooltip}
+        targetWidth={width}
+        targetHeight={height}
+        tooltipPosition={tooltipPosition}
+      >
         <div className="trainer-name">{name}</div>
         <div className="trainer-info">
           <span className="trainer-info-section">

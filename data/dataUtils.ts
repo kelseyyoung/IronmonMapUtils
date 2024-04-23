@@ -1,3 +1,5 @@
+import { TooltipPosition } from "../components";
+
 /**
  * Bounding Box
  */
@@ -59,6 +61,7 @@ export interface TrainerData {
   pokemonLevels: number[]; // Array of levels for the pokemon this trainer has
   walker?: boolean; // T/F if the trainer walks around
   spinner?: boolean; // T/F if the trainer is a stationary spinner
+  tooltipPosition?: TooltipPosition; // Optional custom position of tooltip, to avoid overlap. Defaults to Top
 }
 
 /**

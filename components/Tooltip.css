@@ -9,11 +9,48 @@
   pointer-events: auto;
 }
 
-.tooltip-beak {
+.tooltip::before {
+  content: "";
   position: absolute;
-  border-width: 2px;
-  border-style: solid;
-  margin-top: 2px;
-  margin-left: calc(50% - 4px);
-  border-color: rgba(238, 238, 238, 0.9) transparent transparent transparent;
+  display: block;
+  border: 4px solid transparent;
+  width: 0px;
+}
+
+/* Arrow on top */
+.tooltip.Bottom::before {
+  left: 50%;
+  top: 0px;
+  border-top: 0;
+  border-bottom: 4px solid rgba(238, 238, 238, 0.9);
+  transform: translate(-50%, calc(-100%));
+}
+
+/* Arrow on left */
+.tooltip.Right::before {
+  left: 0;
+  top: 50%;
+  border-left: 0;
+  border-right: 4px solid rgba(238, 238, 238, 0.9);
+  transform: translate(calc(-100%), -50%);
+}
+
+/* Arrow on right */
+.tooltip.Left::before {
+  right: 0;
+  top: 50%;
+  border: 4px solid transparent;
+  border-right: 0;
+  border-left: 4px solid rgba(238, 238, 238, 0.9);
+  transform: translate(calc(100%), -50%);
+}
+
+/* Arrow on top */
+.tooltip.Top::before {
+  left: 50%;
+  bottom: 0;
+  border: 4px solid transparent;
+  border-bottom: 0;
+  border-top: 4px solid rgba(238, 238, 238, 0.9);
+  transform: translate(-50%, calc(100%));
 }
