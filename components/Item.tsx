@@ -70,10 +70,20 @@ export const Item = (props: ItemProps) => {
         y={y}
         height={height}
         width={width}
-        polygonClassNames={`${
-          highlight ? "highlight" : ""
-        } ${convertItemTypeToClassName(type)}`}
       >
+        <foreignObject
+          x={x - 2}
+          y={y - 2}
+          width={16}
+          height={16}
+          style={{ overflow: "visible" }}
+        >
+          <span
+            className={`${
+              highlight ? "highlight" : ""
+            } ${convertItemTypeToClassName(type)}`}
+          ></span>
+        </foreignObject>
         <EntityMark x={x + 1} y={y} size={12} mark={currentMark} />
       </InteractablePolygon>
       {spawnInfo && (
