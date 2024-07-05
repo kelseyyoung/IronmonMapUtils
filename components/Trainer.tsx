@@ -49,7 +49,7 @@ export const Trainer = (props: TrainerProps) => {
     if (pokemonLevels.length === 0 || pokemonLevels[0] === 0) {
       return "?";
     }
-    return [...new Set(pokemonLevels)].join(",");
+    return [...new Set(pokemonLevels)].sort().join(",");
   }, [pokemonLevels]);
 
   return (
