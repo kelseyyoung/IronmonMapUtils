@@ -6,6 +6,7 @@ import { InteractablePolygon } from "./InteractablePolygon";
 import React from "react";
 import { EntityMarkIcon } from "./EntityMark";
 import { useAppSelector } from "../state";
+import { DEBUG_MODE } from "../utils/debugMode";
 
 export interface ItemProps extends ItemData {
   height: number;
@@ -86,7 +87,7 @@ export const Item = (props: ItemProps) => {
         </foreignObject>
         <EntityMark x={x + 1} y={y} size={12} mark={currentMark} />
       </InteractablePolygon>
-      {spawnInfo && (
+      {(spawnInfo || DEBUG_MODE) && (
         <Tooltip
           x={x}
           y={y}
