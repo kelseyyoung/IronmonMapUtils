@@ -29,6 +29,7 @@ export const Trainer = (props: TrainerProps) => {
     width,
     tooltipPosition,
   } = props;
+  const uniqueId = `Trainer_${x}_${y}}`;
   const marks = React.useRef<EntityMarkIcon[]>([
     "none",
     "checked",
@@ -39,7 +40,8 @@ export const Trainer = (props: TrainerProps) => {
   const showTooltip = useAppSelector((state) => state.settings).showTrainerData;
 
   const { currentMark, incrementMark, EntityMark } = useEntityMark(
-    marks.current
+    marks.current,
+    uniqueId
   );
 
   const { shouldShowTooltip, showTooltipOnHover, hideTooltipOnHover } =

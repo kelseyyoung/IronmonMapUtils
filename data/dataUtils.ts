@@ -1,4 +1,5 @@
 import { TooltipPosition } from "../components";
+import { getStorageKey } from "./storageKey";
 
 /**
  * Bounding Box
@@ -93,3 +94,77 @@ export type MapPortalGroup = {
   area: string;
   portals: MapPortalData[];
 };
+
+/**
+ * Storage
+ */
+
+function verifyLocalStorage() {
+  if (!window.localStorage) {
+    console.warn("[Ironmon Map] localStorage unavailable");
+  }
+}
+
+export function setUseSaveDataInStorage(saveData: boolean): void {
+  verifyLocalStorage();
+
+  window.localStorage.setItem(
+    `${getStorageKey()}_UseStorageKey`,
+    `${saveData}`
+  );
+}
+
+export function getUseSaveDataFromStorage(): boolean {
+  verifyLocalStorage();
+  const storedValue = window.localStorage.getItem(
+    `${getStorageKey()}_UseStorageKey`
+  );
+  if (storedValue) {
+    return storedValue === "true";
+  }
+  return false;
+}
+
+function getMarksMapFromStorage(): Record<string, number> {
+  const storedMap = window.localStorage.getItem(`${getStorageKey()}_MarksMap`);
+  if (!storedMap) {
+    return {};
+  }
+  return JSON.parse(storedMap);
+}
+
+export function maybeSetMarkInStorage(id: string, markIndex: number): void {
+  verifyLocalStorage();
+
+  if (!getUseSaveDataFromStorage()) {
+    return;
+  }
+
+  const marksSet = getMarksMapFromStorage();
+  if (markIndex !== 0) {
+    marksSet[id] = markIndex;
+  } else {
+    delete marksSet[id];
+  }
+
+  window.localStorage.setItem(
+    `${getStorageKey()}_MarksMap`,
+    `${JSON.stringify(marksSet)}`
+  );
+}
+
+export function removeMarkFromStorage(id: string): void {
+  const marksSet = getMarksMapFromStorage();
+  delete marksSet[id];
+  window.localStorage.setItem(
+    `${getStorageKey()}_MarksMap`,
+    `${JSON.stringify(marksSet)}`
+  );
+}
+
+export function getMarkFromStorage(id: string): number {
+  verifyLocalStorage();
+
+  const marksSet = getMarksMapFromStorage();
+  return marksSet[id] ?? 0;
+}

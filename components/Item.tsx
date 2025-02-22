@@ -29,6 +29,7 @@ const convertItemTypeToClassName = (itemType: ItemType) => {
 
 export const Item = (props: ItemProps) => {
   const { x, y, height, width, spawnInfo, type } = props;
+  const uniqueId = `Item_${x}_${y}_${type}`;
   const marks = React.useRef<EntityMarkIcon[]>([
     "none",
     "checked",
@@ -55,7 +56,8 @@ export const Item = (props: ItemProps) => {
   }, [type, highlightItems, highlightTMs, highlightHiddenItems]);
 
   const { currentMark, incrementMark, EntityMark } = useEntityMark(
-    marks.current
+    marks.current,
+    uniqueId
   );
 
   const { shouldShowTooltip, showTooltipOnHover, hideTooltipOnHover } =

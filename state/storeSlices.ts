@@ -1,4 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { getUseSaveDataFromStorage, setUseSaveDataInStorage } from "../data";
 
 export enum MapPortalLinesType {
   Always,
@@ -17,6 +18,8 @@ export const mapSettingsSlice = createSlice({
     showMapPortalLines: false,
     showMapPortalLinesType: MapPortalLinesType.Always,
     showRoutes: false,
+    useSaveData: getUseSaveDataFromStorage(),
+    forceClearMarks: 0,
   },
   reducers: {
     setShowTrainerData: (state, action: PayloadAction<boolean>) => {
@@ -48,6 +51,15 @@ export const mapSettingsSlice = createSlice({
     },
     setShowRoutes: (state, action: PayloadAction<boolean>) => {
       state.showRoutes = action.payload;
+    },
+    setUseSaveData: (state, action: PayloadAction<boolean>) => {
+      const useSaveData = action.payload;
+      state.useSaveData = useSaveData;
+      setUseSaveDataInStorage(useSaveData);
+    },
+    triggerForceClearMarks: (state) => {
+      // Just increment the value to trigger listeners
+      state.forceClearMarks = state.forceClearMarks + 1;
     },
   },
 });
