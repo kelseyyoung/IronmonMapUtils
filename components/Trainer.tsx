@@ -29,7 +29,7 @@ export const Trainer = (props: TrainerProps) => {
     width,
     tooltipPosition,
   } = props;
-  const uniqueId = `Trainer_${x}_${y}}`;
+  const uniqueId = `Trainer_${x}_${y}`;
   const marks = React.useRef<EntityMarkIcon[]>([
     "none",
     "checked",

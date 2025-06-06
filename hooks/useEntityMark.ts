@@ -18,9 +18,9 @@ export const useEntityMark = (marks: EntityMarkIcon[], uniqueId: string) => {
 
   const incrementMark = React.useCallback(() => {
     setCurrentMarkIndex((currentMarkIndex) => {
-      const newMarkIndex = currentMarkIndex + 1;
+      const newMarkIndex = (currentMarkIndex + 1) % marks.length;
       maybeSetMarkInStorage(uniqueId, newMarkIndex);
-      return newMarkIndex % marks.length;
+      return newMarkIndex;
     });
   }, [marks, uniqueId]);
 

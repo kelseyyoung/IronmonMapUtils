@@ -2,6 +2,7 @@ import React from "react";
 import Checkmark from "../assets/checkmark.png";
 import Crossed from "../assets/crossed.png";
 import Starred from "../assets/star.png";
+import { getMarksMapFromStorage } from "../data";
 
 export type EntityMarkIcon = "none" | "checked" | "crossed" | "starred";
 
@@ -32,7 +33,18 @@ export interface EntityMarkProps {
 export const EntityMark = (props: EntityMarkProps) => {
   const { mark, x, y, size } = props;
 
-  return entityMarkIconMap[mark]({
+  let markToUse = mark;
+  if (!entityMarkIconMap[mark]) {
+    console.log("Error - mark not found for", {
+      mark,
+      x,
+      y,
+      map: getMarksMapFromStorage(),
+    });
+    markToUse = "none";
+  }
+
+  return entityMarkIconMap[markToUse]({
     x,
     y,
     height: size,

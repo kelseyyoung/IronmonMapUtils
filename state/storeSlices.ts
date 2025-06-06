@@ -1,5 +1,9 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { getUseSaveDataFromStorage, setUseSaveDataInStorage } from "../data";
+import {
+  clearMarksMapInStorage,
+  getUseSaveDataFromStorage,
+  setUseSaveDataInStorage,
+} from "../data";
 
 export enum MapPortalLinesType {
   Always,
@@ -60,6 +64,7 @@ export const mapSettingsSlice = createSlice({
     triggerForceClearMarks: (state) => {
       // Just increment the value to trigger listeners
       state.forceClearMarks = state.forceClearMarks + 1;
+      clearMarksMapInStorage();
     },
   },
 });

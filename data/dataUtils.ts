@@ -125,12 +125,17 @@ export function getUseSaveDataFromStorage(): boolean {
   return false;
 }
 
-function getMarksMapFromStorage(): Record<string, number> {
+export function getMarksMapFromStorage(): Record<string, number> {
   const storedMap = window.localStorage.getItem(`${getStorageKey()}_MarksMap`);
   if (!storedMap) {
     return {};
   }
   return JSON.parse(storedMap);
+}
+
+export function clearMarksMapInStorage(): void {
+  verifyLocalStorage();
+  window.localStorage.setItem(`${getStorageKey()}_MarksMap`, `{}`);
 }
 
 export function maybeSetMarkInStorage(id: string, markIndex: number): void {
@@ -166,5 +171,9 @@ export function getMarkFromStorage(id: string): number {
   verifyLocalStorage();
 
   const marksSet = getMarksMapFromStorage();
-  return marksSet[id] ?? 0;
+
+  // I accidentally included an extra '}' in the IDs for trainers for a while.
+  // I've fixed that mistake in Trainer.tsx, but existing storage will still have the extra '}'.
+  // So check for both
+  return marksSet[id] ?? marksSet[id + "}"] ?? 0;
 }
