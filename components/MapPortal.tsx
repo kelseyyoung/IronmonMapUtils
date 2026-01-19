@@ -13,7 +13,7 @@ export interface MapPortalProps extends MapPortalData {
   size: number;
 }
 
-export const MapPortal = (props: MapPortalProps) => {
+export const MapPortal = React.memo((props: MapPortalProps) => {
   const { portal1, portal2, scale, offsetMapCoords, index, color, size } =
     props;
 
@@ -108,4 +108,4 @@ export const MapPortal = (props: MapPortalProps) => {
       )}
     </>
   );
-};
+});

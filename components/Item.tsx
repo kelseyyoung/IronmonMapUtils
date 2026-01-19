@@ -27,7 +27,7 @@ const convertItemTypeToClassName = (itemType: ItemType) => {
   }
 };
 
-export const Item = (props: ItemProps) => {
+export const Item = React.memo((props: ItemProps) => {
   const { x, y, height, width, spawnInfo, type } = props;
   const uniqueId = `Item_${x}_${y}_${type}`;
   const marks = React.useRef<EntityMarkIcon[]>([
@@ -102,4 +102,4 @@ export const Item = (props: ItemProps) => {
       )}
     </>
   );
-};
+});

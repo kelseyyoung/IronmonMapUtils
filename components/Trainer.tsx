@@ -16,7 +16,7 @@ export interface TrainerProps extends TrainerData {
   width: number;
 }
 
-export const Trainer = (props: TrainerProps) => {
+export const Trainer = React.memo((props: TrainerProps) => {
   const {
     name,
     numPokemon,
@@ -109,4 +109,4 @@ export const Trainer = (props: TrainerProps) => {
       </Tooltip>
     </>
   );
-};
+});
